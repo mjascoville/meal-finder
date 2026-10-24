@@ -1,11 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View your saved recipes on Meal Finder.">
+  <title>Saved Recipes | Meal Finder</title>
+  <link rel="stylesheet" href="css/layout.css">
 </head>
 <body>
-    
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-brand" href="index.html">Meal Finder</a>
+
+      <nav class="primary-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html">Home</a>
+
+        <details class="nav-dropdown">
+          <summary class="nav-link">Recipes</summary>
+          <div class="dropdown-menu">
+            <a href="index.html">Find Recipes</a>
+            <a href="saved.html" aria-current="page">Saved Recipes</a>
+            <a href="add-recipe.html">Add a Recipe</a>
+          </div>
+        </details>
+
+        <a class="nav-link" href="shopping-list.html">Shopping List</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="site-main">
+    <div class="container">
+      <h1>Saved Recipes</h1>
+      <p>Recipes you have set aside for later.</p>
+      <!-- Saved recipes will eventually load from localStorage. -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Meal Finder &middot; WDD 231 Team Project</p>
+    </div>
+  </footer>
 </body>
 </html>
