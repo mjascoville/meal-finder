@@ -225,7 +225,10 @@
 
 .random-button {
   margin-top: 1rem;
-  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  line-height: inherit;
   cursor: pointer;
 }
 
