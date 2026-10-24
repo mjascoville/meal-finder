@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Add your own recipes to Meal Finder.">
   <title>Add a Recipe | Meal Finder</title>
-  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/add-recipe.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -32,11 +32,84 @@
     </div>
   </header>
 
-  <main id="main-content" class="site-main">
-    <div class="container">
-      <h1>Add a Recipe</h1>
-      <p>Save one of your own recipes.</p>
-      <!-- The recipe submission form will go here. -->
+  <main id="main-content" class="site-main add">
+    <div class="container add-content">
+      <div class="intro">
+        <h1>Add a Recipe</h1>
+        <p>Save one of your own recipes by filling out the details below.</p>
+      </div>
+
+      <form class="form" action="#" method="post">
+        <div class="field">
+          <label for="name">Recipe name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="field">
+          <label for="description">Short description</label>
+          <textarea id="description" name="description" rows="3" required></textarea>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+              <option value="">Choose a category</option>
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+              <option value="dessert">Dessert</option>
+              <option value="snack">Snack</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="servings">Servings</label>
+            <input type="number" id="servings" name="servings" min="1" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="prep-time">Prep time (minutes)</label>
+            <input type="number" id="prep-time" name="prep-time" min="0" required>
+          </div>
+
+          <div class="field">
+            <label for="cook-time">Cook time (minutes)</label>
+            <input type="number" id="cook-time" name="cook-time" min="0" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="ingredients">Ingredients</label>
+          <textarea
+            id="ingredients"
+            name="ingredients"
+            rows="6"
+            placeholder="Add one ingredient per line"
+            required
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="instructions">Instructions</label>
+          <textarea
+            id="instructions"
+            name="instructions"
+            rows="7"
+            placeholder="Write the steps in order"
+            required
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="image">Image URL <span>(optional)</span></label>
+          <input type="url" id="image" name="image" placeholder="https://example.com/recipe.jpg">
+        </div>
+
+        <button class="submit" type="submit">Save recipe</button>
+      </form>
     </div>
   </main>
 
