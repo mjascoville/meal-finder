@@ -1,0 +1,228 @@
+@import "./layout.css";
+
+.search-page {
+	display: grid;
+	gap: 1.5rem;
+}
+
+.search-form {
+	max-width: 42rem;
+}
+
+.search-form label {
+	display: block;
+	margin-bottom: 0.45rem;
+	font-weight: 700;
+}
+
+#recipe-search {
+  z-index: 2;
+}
+
+.search-actions {
+	position: relative;
+	display: flex;
+	flex: 0 0 auto;
+  z-index: 1;
+}
+
+.search-type-options {
+	position: absolute;
+	top: 0;
+	left: 100%;
+	z-index: -1;
+	display: flex;
+	gap: 0.3rem;
+	height: 100%;
+	padding: 0.25rem;
+	border: 1px solid var(--green-dark);
+	border-radius: 0 0.45rem 0.45rem 0;
+	background: var(--surface);
+	opacity: 0;
+	pointer-events: none;
+	transform: translateX(-100%);
+	visibility: hidden;
+	transition: transform 0.2s, opacity 0.2s, visibility 0s linear 0.2s;
+}
+
+.search-actions.is-open .search-type-options {
+	opacity: 1;
+	pointer-events: auto;
+	transform: translateX(0);
+	visibility: visible;
+  transition: transform 0.2s, opacity 0.2s, visibility 0s linear 0s;
+}
+
+.search-type-option {
+	flex: 0 0 auto;
+	padding: 0.4rem 0.6rem;
+	border: 0;
+	border-radius: 0.25rem;
+	color: var(--text);
+	background: transparent;
+	font: inherit;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.search-type-option:hover,
+.search-type-option[aria-pressed="true"] {
+	color: var(--green-dark);
+	background: #e7f1e9;
+}
+
+.search-form__controls {
+	display: flex;
+	gap: 0;
+	overflow: visible;
+}
+
+.search-form input[type="search"] {
+	flex: 1;
+	min-width: 0;
+	padding: 0.75rem;
+	border: 1px solid var(--border);
+	border-radius: 0.45rem 0 0 0.45rem;
+	font: inherit;
+}
+
+.search-form input:focus-visible,
+.search-actions button:focus-visible {
+	outline: 3px solid #28604750;
+	outline-offset: 2px;
+}
+
+.search-submit,
+.search-type-button {
+	position: relative;
+	z-index: 1;
+	color: white;
+	background: var(--green);
+	cursor: pointer;
+}
+
+.search-submit {
+	padding: 0.75rem 1rem;
+	border: 0;
+	border-radius: 0;
+	font: inherit;
+	font-weight: 700;
+}
+
+.search-type-button {
+	display: grid;
+	place-items: center;
+	height: 100%;
+	width: 2.25rem;
+	padding: 0;
+	border: 0;
+	border-left: 1px solid #ffffff50;
+	border-radius: 0 0.45rem 0.45rem 0;
+}
+
+.search-type-button::after {
+	content: "";
+	width: 0.4rem;
+	height: 0.4rem;
+	border-top: 2px solid currentColor;
+	border-right: 2px solid currentColor;
+	transform: rotate(45deg);
+	transition: transform 220ms ease;
+}
+
+.search-actions.is-open .search-type-button::after {
+	transform: rotate(225deg);
+}
+
+.search-submit:hover,
+.search-type-button:hover {
+	background: var(--green-dark);
+}
+
+.search-results h2 {
+	margin-bottom: 0.5rem;
+	color: var(--green-dark);
+}
+
+#search-status {
+	min-height: 1.5em;
+}
+
+.meal-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+	gap: 1rem;
+}
+
+.meal-card {
+	position: relative;
+	overflow: hidden;
+	border: 1px solid var(--border);
+	border-radius: 0.8rem;
+	background: var(--surface);
+	box-shadow: 0 0.4rem 1.4rem #182d1b0a;
+	cursor: pointer;
+	transition: box-shadow 0.2s ease, scale 0.2s ease;
+	scale: 1;
+}
+
+.meal-card:hover {
+	scale: 1.03;
+	box-shadow: 0 0.6rem 1.8rem #182d1b14;
+	transition: box-shadow 0.2s ease, scale 0.2s ease;
+}
+
+.meal-card__image {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+}
+
+.meal-card__content {
+	padding: 1rem;
+}
+
+.meal-card__title {
+	margin: 0;
+	color: var(--green-dark);
+	font-size: 1.2rem;
+}
+
+.meal-card__title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.meal-card__title a::after {
+	position: absolute;
+	inset: 0;
+	content: "";
+}
+
+.meal-card__details {
+	margin: 0.4rem 0 0;
+	color: #4b5d51;
+}
+
+@media (max-width: 520px) {
+	.search-form__controls {
+		flex-direction: column;
+		gap: 0.65rem;
+	}
+
+	.search-form input[type="search"] {
+		border-radius: 0.45rem;
+	}
+
+	.search-actions {
+		align-self: flex-start;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.search-type-options,
+	.search-type-button::after {
+		transition: none;
+	}
+}

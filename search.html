@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Search TheMealDB for recipes by meal name.">
+	<title>Search Recipes | Meal Finder</title>
+	<link rel="stylesheet" href="css/search.css">
+	<script type="module" src="js/search.mjs"></script>
+</head>
+<body>
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
+	<header class="site-header">
+		<div class="container site-header__inner">
+			<a class="site-brand" href="index.html">Meal Finder</a>
+
+			<nav class="primary-nav" aria-label="Main navigation">
+				<a class="nav-link" href="index.html">Home</a>
+
+				<details class="nav-dropdown">
+					<summary class="nav-link">Recipes</summary>
+					<div class="dropdown-menu">
+						<a href="index.html">Find Recipes</a>
+						<a href="saved.html">Saved Recipes</a>
+						<a href="add-recipe.html">Add a Recipe</a>
+					</div>
+				</details>
+
+				<a class="nav-link" href="shopping-list.html">Shopping List</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main-content" class="site-main">
+		<div class="container search-page">
+			<h1>Search Recipes</h1>
+			<form class="search-form" action="search.html" method="get">
+				<input type="hidden" name="type" id="search-type" value="name">
+				<label for="recipe-search" id="search-input-label">What meal would you like to cook?</label>
+				<div class="search-form__controls">
+					<input
+						type="search"
+						id="recipe-search"
+						name="q"
+						placeholder='Try "pasta" or "chicken"'
+						required
+					>
+					<div class="search-actions" id="search-actions">
+						<div
+							id="search-type-options"
+							class="search-type-options"
+							aria-hidden="true"
+						>
+							<button type="button" class="search-type-option" data-search-type="name">Meal name</button>
+							<button type="button" class="search-type-option" data-search-type="ingredient">Ingredient</button>
+							<button type="button" class="search-type-option" data-search-type="category">Category</button>
+						</div>
+						<button type="submit" class="search-submit">Search recipes</button>
+						<button
+							type="button"
+							id="search-type-button"
+							class="search-type-button"
+							aria-label="Choose search type"
+							aria-haspopup="true"
+							aria-expanded="false"
+							aria-controls="search-type-options"
+						></button>
+					</div>
+				</div>
+			</form>
+
+			<section class="search-results" aria-labelledby="results-heading">
+				<h2 id="results-heading">Results</h2>
+				<p id="search-status" role="status" aria-live="polite"></p>
+				<div id="search-results" class="meal-grid"></div>
+			</section>
+		</div>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container">
+			<p>Meal Finder &middot; WDD 231 Team Project</p>
+		</div>
+	</footer>
+</body>
+</html>
