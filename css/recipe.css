@@ -1,0 +1,91 @@
+@import "./layout.css";
+
+.recipe-page {
+	max-width: 60rem;
+}
+
+.recipe-header {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.8fr);
+	gap: 2rem;
+	align-items: start;
+}
+
+.recipe-header h1 {
+	margin-bottom: 0.5rem;
+}
+
+.recipe-meta {
+	margin: 0 0 1rem;
+	color: #4b5d51;
+}
+
+.recipe-image {
+	width: 100%;
+	border-radius: 0.8rem;
+}
+
+.save-recipe-button {
+	padding: 0.65rem 0.9rem;
+	border: 1px solid var(--green);
+	border-radius: 0.45rem;
+	color: white;
+	background: var(--green);
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.save-recipe-button:hover {
+	background: var(--green-dark);
+}
+
+.save-recipe-button--remove {
+	border-color: #d6a29c;
+	color: #842d25;
+	background: #fff7f5;
+}
+
+.save-recipe-button--remove:hover {
+	border-color: #b96d64;
+	background: #fce7e3;
+}
+
+.recipe-content {
+	display: grid;
+	grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.5fr);
+	gap: 2rem;
+	margin-top: 2rem;
+}
+
+.recipe-content h2 {
+	color: var(--green-dark);
+}
+
+.ingredient-list {
+	display: grid;
+	gap: 0.6rem;
+	padding-left: 1.25rem;
+}
+
+.instructions p {
+	margin: 0 0 1rem;
+}
+
+a:focus-visible,
+button:focus-visible {
+	outline: 3px solid #b16c22;
+	outline-offset: 3px;
+}
+
+@media (max-width: 650px) {
+	.recipe-header,
+	.recipe-content {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 1rem;
+	}
+
+	.recipe-image {
+		max-width: 32rem;
+	}
+}
