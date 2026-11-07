@@ -2,116 +2,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Meal Finder helps you find, save, and organize recipes.">
-  <title>Home | Meal Finder</title>
-  <link rel="stylesheet" href="css/home.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Meal Finder helps you find, save, and organize recipes.">
+	<title>Home | Meal Finder</title>
+	<link rel="stylesheet" href="css/home.css">
+	<script type="module" src="js/main.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+	<a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <header class="site-header">
-    <div class="container site-header__inner">
-      <a class="site-brand" href="index.html">Meal Finder</a>
+	<header class="site-header">
+		<div class="container site-header__inner">
+			<a class="site-brand" href="index.html">Meal Finder</a>
 
-      <nav class="primary-nav">
-        <a class="nav-link" href="index.html">Home</a>
+			<nav class="primary-nav">
+				<a class="nav-link" href="index.html">Home</a>
 
-        <details class="nav-dropdown">
-          <summary class="nav-link">Recipes</summary>
-          <div class="dropdown-menu">
-            <a href="index.html">Find Recipes</a>
-            <a href="saved.html">Saved Recipes</a>
-            <a href="add-recipe.html">Add a Recipe</a>
-          </div>
-        </details>
+				<details class="nav-dropdown">
+					<summary class="nav-link">Recipes</summary>
+					<div class="dropdown-menu">
+						<a href="search.html">Find Recipes</a>
+						<a href="saved.html">Saved Recipes</a>
+						<a href="add-recipe.html">Add a Recipe</a>
+					</div>
+				</details>
 
-        <a class="nav-link" href="shopping-list.html">Shopping List</a>
-      </nav>
-    </div>
-  </header>
+				<a class="nav-link" href="shopping-list.html">Shopping List</a>
+			</nav>
+		</div>
+	</header>
 
-  <main id="main-content" class="site-main home">
-    <div class="container home-content">
-      <section class="hero">
-        <p class="small-header">Make something delicious today</p>
-        <h1 class="hero-title" id="welcome-heading">Find your next favorite meal</h1>
-        <p class="hero-text">Explore simple recipes, save the ones you love, and make your next meal plan a little easier.</p>
+	<main id="main-content" class="site-main home">
+		<div class="container home-content">
+			<section class="hero">
+				<p class="small-header">Make something delicious today</p>
+				<h1 class="hero-title" id="welcome-heading">Find your next favorite meal</h1>
+				<p class="hero-text">Explore simple recipes, save the ones you love, and make your next meal plan a little easier.</p>
 
-        <!-- This search function will need to be changed at some point to utilize the API -->
-        <form class="search-form" action="index.html" method="get">
-          <label class="search-label" for="recipe-search">What would you like to cook?</label>
-          <input
-            class="search-input"
-            type="search"
-            id="recipe-search"
-            name="q"
-            placeholder='Try "pasta" or "Mexican"'
-          >
-          <button class="search-button" type="submit">Search recipes</button>
-        </form>
-      </section>
+				<form class="search-form" action="search.html" method="get">
+					<label class="search-label" for="recipe-search">What would you like to cook?</label>
+					<input
+						class="search-input"
+						type="search"
+						id="recipe-search"
+						name="q"
+						placeholder='Try "pasta" or "salad"'
+					>
+					<button class="search-button" type="submit">Search recipes</button>
+				</form>
+			</section>
 
-      <section class="categories">
-        <h2 class="section-title" id="categories-heading">Browse by mood</h2>
+			<section class="categories">
+				<h2 class="section-title" id="categories-heading">Browse by mood</h2>
+				<p id="category-status" class="section-text" role="status" aria-live="polite">Loading categories...</p>
+				<ul class="category-list" id="category-list"></ul>
+			</section>
 
-        <!-- An idea I had was to have this pick three random categories returned by the API -->
-        <ul class="category-list">
-          <li><a class="category-link" href="#">Quick and easy</a></li>
-          <li><a class="category-link" href="#">Savory</a></li>
-          <li><a class="category-link" href="#">Dessert</a></li>
-        </ul>
-      </section>
+			<section class="featured">
+				<h2 class="section-title" id="featured-heading">A few ideas to get you started</h2>
+				<p class="section-text">Everyday favorites for whatever sounds good.</p>
 
-      <section class="featured">
-        <h2 class="section-title" id="featured-heading">A few ideas to get you started</h2>
-        <p class="section-text">Everyday favorites for whatever sounds good.</p>
+				<p id="meal-status" class="section-text" role="status" aria-live="polite">Loading random meals...</p>
+				<div class="recipe-list" id="random-meals"></div>
+				<p class="section-text" id="random-text">None of these sound good at the moment?</p>
+				<button class="button button-primary random-button" id="refresh-meals" type="button">Show me different meals</button>
 
-        <!-- Just like with the categories, this will be three random recipes returned using the API -->
-        <div class="recipe-list">
-          <article class="recipe" id="quick-and-easy">
-            <p class="recipe-type">Quick and easy ~ 25 minutes</p>
-            <h3 class="recipe-title" id="quick-recipe">Lemon Garlic Pasta</h3>
-            <p class="recipe-text">A bright, comforting bowl with garlic, fresh lemon, and a sprinkle of parmesan.</p>
-            <a class="recipe-link" href="recipe.html">View recipe</a>
-          </article>
+			</section>
 
-          <article class="recipe" id="vegetarian">
-            <p class="recipe-type">Vegetarian ~ 30 minutes</p>
-            <h3 class="recipe-title" id="vegetarian-recipe">Roasted Veggie Grain Bowl</h3>
-            <p class="recipe-text">Colorful roasted vegetables, hearty grains, and a simple herby dressing.</p>
-            <a class="recipe-link" href="recipe.html">View recipe</a>
-          </article>
+			<section class="own-recipes">
+				<h2 class="section-title own-title" id="your-kitchen-heading">Make it your own</h2>
+				<p class="section-text">Keep recipes you want to revisit, or add a favorite from your own kitchen.</p>
+				<div class="own-links">
+					<a class="button button-primary" href="saved.html">See saved recipes</a>
+					<a class="button" href="add-recipe.html">Add your own recipe</a>
+				</div>
+			</section>
+		</div>
+	</main>
 
-          <article class="recipe" id="comfort-food">
-            <p class="recipe-type">Comfort food ~ 40 minutes</p>
-            <h3 class="recipe-title" id="comfort-recipe">Cozy Tomato Soup</h3>
-            <p class="recipe-text">Rich tomato soup with pantry-friendly ingredients, perfect with crusty bread.</p>
-            <a class="recipe-link" href="recipe.html">View recipe</a>
-          </article>
-        </div>
-        <!-- This will be used to pick three new recipes to display above -->
-        <p class="section-text" id="random-text">None of these sound good at the moment?</p>
-        <button class="button button-primary random-button" type="button">Show me different meals</button>
-
-      </section>
-
-      <section class="own-recipes">
-        <h2 class="section-title own-title" id="your-kitchen-heading">Make it your own</h2>
-        <p class="section-text">Keep recipes you want to revisit, or add a favorite from your own kitchen.</p>
-        <div class="own-links">
-          <a class="button button-primary" href="saved.html">See saved recipes</a>
-          <a class="button" href="add-recipe.html">Add your own recipe</a>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>Meal Finder - WDD 231 Team Project</p>
-    </div>
-  </footer>
+	<footer class="site-footer">
+		<div class="container">
+			<p>Meal Finder - WDD 231 Team Project</p>
+		</div>
+	</footer>
 </body>
 </html>
