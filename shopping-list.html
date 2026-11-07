@@ -7,6 +7,8 @@
   <meta name="description" content="Organize ingredients with your Meal Finder shopping list.">
   <title>Shopping List | Meal Finder</title>
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/shopping-list.css">
+  <script type="module" src="js/shopping-list.mjs"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -36,7 +38,23 @@
     <div class="container">
       <h1>Shopping List</h1>
       <p>Keep track of the ingredients you need.</p>
-      <!-- Shopping list items and progress will go here. -->
+
+      <section class="shopping-panel" aria-label="Your shopping list">
+        <form id="shopping-form" class="shopping-form">
+          <label for="ingredient-input">Add an ingredient</label>
+          <div class="shopping-form__controls">
+            <input id="ingredient-input" name="ingredient" type="text"
+              placeholder="Example: 2 cups of flour" maxlength="120" required>
+            <button type="submit">Add item</button>
+          </div>
+        </form>
+
+        <p id="shopping-progress-text">0 of 0 items completed</p>
+        <progress id="shopping-progress" value="0" max="100" aria-label="Shopping progress"></progress>
+        <p id="shopping-empty">Your shopping list is empty. Add an ingredient to get started.</p>
+        <ul id="shopping-items" class="shopping-items"></ul>
+        <p id="shopping-message" role="status" aria-live="polite"></p>
+      </section>
     </div>
   </main>
 
