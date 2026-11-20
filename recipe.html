@@ -7,31 +7,40 @@
 	<meta name="description" content="View ingredients and instructions for a recipe on Meal Finder.">
 	<title>Recipe Details | Meal Finder</title>
 	<link rel="stylesheet" href="css/recipe.css">
+	<link rel="stylesheet" href="css/navigation.css">
 	<script type="module" src="js/recipe.mjs"></script>
+	<script type="module" src="js/navigation.mjs"></script>
 </head>
 <body>
 	<a class="skip-link" href="#main-content">Skip to main content</a>
 
-	<header class="site-header">
-		<div class="container site-header__inner">
-			<a class="site-brand" href="index.html">Meal Finder</a>
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a class="site-brand" href="index.html">Meal Finder</a>
 
-			<nav class="primary-nav" aria-label="Main navigation">
-				<a class="nav-link" href="index.html">Home</a>
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-controls="primary-navigation"
+                aria-expanded="false"
+            >
+                <span aria-hidden="true">&#9776;</span>
+                Menu
+            </button>
 
-				<details class="nav-dropdown">
-					<summary class="nav-link">Recipes</summary>
-					<div class="dropdown-menu">
-						<a href="index.html">Find Recipes</a>
-						<a href="saved.html">Saved Recipes</a>
-						<a href="add-recipe.html">Add a Recipe</a>
-					</div>
-				</details>
-
-				<a class="nav-link" href="shopping-list.html">Shopping List</a>
-			</nav>
-		</div>
-	</header>
+            <nav
+                id="primary-navigation"
+                class="primary-nav"
+                aria-label="Main navigation"
+            >
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="search.html">Find Recipes</a>
+                <a class="nav-link" href="saved.html">Saved Recipes</a>
+                <a class="nav-link" href="add-recipe.html">Add a Recipe</a>
+                <a class="nav-link" href="shopping-list.html">Shopping List</a>
+            </nav>
+        </div>
+    </header>
 
 	<main id="main-content" class="site-main">
 		<div class="container recipe-page">
