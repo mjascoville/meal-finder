@@ -1,6 +1,7 @@
-
-// Keep this separate from Ryan's "meal-finder:saved-recipes" key.
-const STORAGE_KEY = "meal-finder:shopping-list";
+import {
+  loadShoppingItems,
+  saveShoppingItems
+} from "./shopping-storage.mjs";
 
 const form = document.querySelector("#shopping-form");
 const input = document.querySelector("#ingredient-input");
@@ -10,32 +11,23 @@ const statusMessage = document.querySelector("#shopping-message");
 const progressText = document.querySelector("#shopping-progress-text");
 const progressBar = document.querySelector("#shopping-progress");
 
-// Read the saved items when the page first loads.
 function loadItems() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) return [];
-
-    const parsed = JSON.parse(saved);
-    if (!Array.isArray(parsed)) throw new Error("Invalid list format");
-
-    return parsed.filter(item =>
-      item && typeof item.id === "string" &&
-      typeof item.name === "string" && typeof item.completed === "boolean"
-    );
+    return loadShoppingItems();
   } catch {
-    statusMessage.textContent = "Your saved shopping list could not be loaded.";
+    statusMessage.textContent =
+      "Your saved shopping list could not be loaded.";
     return [];
   }
 }
 
-// Save after every change: add, check/uncheck, or remove.
 function saveItems() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    saveShoppingItems(items);
     statusMessage.textContent = "";
   } catch {
-    statusMessage.textContent = "Changes could not be saved in this browser.";
+    statusMessage.textContent =
+      "Changes could not be saved in this browser.";
   }
 }
 

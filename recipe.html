@@ -57,10 +57,19 @@
 				</header>
 
 				<div class="recipe-content">
-					<section aria-labelledby="ingredients-heading">
-						<h2 id="ingredients-heading">Ingredients</h2>
-						<ul id="recipe-ingredients" class="ingredient-list"></ul>
-					</section>
+                <section aria-labelledby="ingredients-heading">
+                    <h2 id="ingredients-heading">Ingredients</h2>
+                    <ul id="recipe-ingredients" class="ingredient-list"></ul>
+
+                    <button
+                        type="button"
+                        id="add-ingredients-button"
+                        class="save-recipe-button"
+                    >
+                        Add Ingredients to Shopping List
+                    </button>
+                    <p id="add-ingredients-status" role="status" aria-live="polite"></p>
+                </section>
 
 					<section aria-labelledby="instructions-heading">
 						<h2 id="instructions-heading">Instructions</h2>

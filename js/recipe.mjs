@@ -1,12 +1,18 @@
 import { getMealById } from "./recipedb.mjs";
 import { isRecipeSaved, removeSavedRecipe, saveRecipe } from "./saved.mjs";
+import { addShoppingIngredients } from "./shopping-storage.mjs";
 
 const recipeStatus = document.querySelector("#recipe-status");
 const recipeDetails = document.querySelector("#recipe-details");
 const saveButton = document.querySelector("#save-recipe-button");
 const saveStatus = document.querySelector("#save-recipe-status");
+const addIngredientsButton = document.querySelector("#add-ingredients-button");
+const addIngredientsStatus = document.querySelector("#add-ingredients-status");
+
 const mealId = new URLSearchParams(window.location.search).get("id");
+
 let currentMeal;
+let currentIngredients = [];
 
 function updateSaveButton() {
 	try {
@@ -21,16 +27,29 @@ function updateSaveButton() {
 	}
 }
 
-function showIngredients(meal) {
-	const list = document.querySelector("#recipe-ingredients");
+// Extract ingredients and measurements from TheMealDB data.
+function getRecipeIngredients(meal) {
+	const ingredients = [];
 
 	for (let number = 1; number <= 20; number += 1) {
 		const ingredient = meal[`strIngredient${number}`]?.trim();
 		if (!ingredient) continue;
 
 		const measure = meal[`strMeasure${number}`]?.trim();
+		ingredients.push(measure ? `${measure} ${ingredient}` : ingredient);
+	}
+
+	return ingredients;
+}
+
+// Display the extracted ingredients.
+function showIngredients(ingredients) {
+	const list = document.querySelector("#recipe-ingredients");
+	list.replaceChildren();
+
+	for (const ingredient of ingredients) {
 		const item = document.createElement("li");
-		item.textContent = measure ? `${measure} ${ingredient}` : ingredient;
+		item.textContent = ingredient;
 		list.append(item);
 	}
 }
@@ -67,13 +86,18 @@ function showRecipe(meal) {
 		image.hidden = false;
 	}
 
-	showIngredients(meal);
+	// Extract ingredients once and reuse them.
+	currentIngredients = getRecipeIngredients(meal);
+	showIngredients(currentIngredients);
+	addIngredientsButton.disabled = currentIngredients.length === 0;
+
 	showInstructions(meal);
 	recipeDetails.hidden = false;
 	recipeStatus.hidden = true;
 	updateSaveButton();
 }
 
+// Save or remove a recipe from saved recipes.
 saveButton.addEventListener("click", () => {
 	try {
 		if (isRecipeSaved(currentMeal.idMeal)) {
@@ -88,6 +112,22 @@ saveButton.addEventListener("click", () => {
 	} catch (error) {
 		console.error("Could not update saved recipe:", error);
 		saveStatus.textContent = error.message;
+	}
+});
+
+// Add the recipe ingredients to the Shopping List.
+addIngredientsButton.addEventListener("click", () => {
+	if (!currentMeal || currentIngredients.length === 0) return;
+
+	try {
+		const count = addShoppingIngredients(currentIngredients);
+
+		addIngredientsStatus.textContent =
+			`${count} ingredient${count === 1 ? "" : "s"} added to your Shopping List.`;
+	} catch (error) {
+		console.error("Could not add ingredients:", error);
+		addIngredientsStatus.textContent =
+			"Unable to update your Shopping List. Please try again.";
 	}
 });
 
