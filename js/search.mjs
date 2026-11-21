@@ -57,12 +57,46 @@ function closeSearchOptions() {
 	searchActions.classList.remove("is-open");
 }
 
+function updateSearchOptionsPlacement() {
+	searchActions.classList.remove("is-overflowing");
+
+	const viewportWidth = document.documentElement.clientWidth;
+	const viewportGutter = parseFloat(
+		getComputedStyle(document.documentElement).fontSize,
+	);
+	const actionsRect = searchActions.getBoundingClientRect();
+	const optionsWidth = searchTypeOptions.offsetWidth;
+	const availableWidth = Math.max(0, viewportWidth - 2 * viewportGutter);
+
+	if (actionsRect.right + optionsWidth <= viewportWidth - viewportGutter) {
+		searchActions.style.removeProperty("--search-options-left");
+		return;
+	}
+
+	const menuWidth = Math.min(optionsWidth, availableWidth);
+	const menuLeft = Math.min(
+		Math.max(viewportGutter, actionsRect.left),
+		viewportWidth - viewportGutter - menuWidth,
+	);
+	searchActions.style.setProperty(
+		"--search-options-left",
+		`${menuLeft - actionsRect.left}px`,
+	);
+	searchActions.classList.add("is-overflowing");
+}
+
 searchTypeButton.addEventListener("click", () => {
 	const isOpen = searchTypeButton.getAttribute("aria-expanded") === "true";
+	if (!isOpen) {
+		updateSearchOptionsPlacement();
+	}
 	searchTypeButton.setAttribute("aria-expanded", String(!isOpen));
 	searchTypeOptions.setAttribute("aria-hidden", String(isOpen));
 	searchActions.classList.toggle("is-open", !isOpen);
 });
+
+window.addEventListener("resize", updateSearchOptionsPlacement);
+updateSearchOptionsPlacement();
 
 searchTypeOptions.addEventListener("click", (event) => {
 	const option = event.target.closest(".search-type-option");
