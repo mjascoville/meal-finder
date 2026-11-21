@@ -57,19 +57,42 @@
   }
 
   .primary-nav {
-    display: none;
+    display: flex;
     width: 100%;
     flex: 0 0 100%;
     flex-direction: column;
     align-items: stretch;
     gap: 0.2rem;
-    margin: 0;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--border);
+    max-height: 0;
+    margin-top: -0.75rem;
+    padding-top: 0;
+    overflow: hidden;
+    border-top: 1px solid transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-height 250ms ease,
+      margin-top 250ms ease,
+      padding-top 250ms ease,
+      border-color 250ms ease,
+      opacity 200ms ease,
+      visibility 0s linear 250ms;
   }
 
   .primary-nav.is-open {
-    display: flex;
+    max-height: 20rem;
+    margin-top: 0;
+    padding-top: 0.75rem;
+    border-top-color: var(--border);
+    opacity: 1;
+    visibility: visible;
+    transition:
+      max-height 250ms ease,
+      margin-top 250ms ease,
+      padding-top 250ms ease,
+      border-color 250ms ease,
+      opacity 200ms ease,
+      visibility 0s;
   }
 
   .primary-nav .nav-link {
