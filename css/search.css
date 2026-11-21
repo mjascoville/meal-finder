@@ -112,7 +112,7 @@
 .search-type-button {
 	display: grid;
 	place-items: center;
-	height: 100%;
+	align-self: stretch;
 	width: 2.25rem;
 	padding: 0;
 	border: 0;
@@ -213,6 +213,10 @@
 
 	.search-form input[type="search"] {
 		border-radius: 0.45rem;
+	}
+
+	.search-submit {
+		border-radius: 0.45rem 0 0 0.45rem;
 	}
 
 	.search-actions {
