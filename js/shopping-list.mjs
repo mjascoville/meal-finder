@@ -6,6 +6,7 @@ import {
 const form = document.querySelector("#shopping-form");
 const input = document.querySelector("#ingredient-input");
 const list = document.querySelector("#shopping-items");
+const clearButton = document.querySelector("#clear-shopping-list");
 const emptyMessage = document.querySelector("#shopping-empty");
 const statusMessage = document.querySelector("#shopping-message");
 const progressText = document.querySelector("#shopping-progress-text");
@@ -25,9 +26,11 @@ function saveItems() {
   try {
     saveShoppingItems(items);
     statusMessage.textContent = "";
+    return true;
   } catch {
     statusMessage.textContent =
       "Changes could not be saved in this browser.";
+    return false;
   }
 }
 
@@ -76,7 +79,25 @@ function renderItems() {
   progressText.textContent = `${completedCount} of ${totalCount} items completed`;
   progressBar.value = totalCount === 0 ? 0 : (completedCount / totalCount) * 100;
   emptyMessage.hidden = totalCount !== 0;
+  clearButton.hidden = totalCount === 0;
 }
+
+clearButton.addEventListener("click", () => {
+  if (
+    items.length === 0 ||
+    !window.confirm("Are you sure you want to remove all items from your shopping list?")
+  ) {
+    return;
+  }
+
+  items = [];
+  const saved = saveItems();
+  renderItems();
+  if (saved) {
+    statusMessage.textContent = "All items were removed from your shopping list.";
+  }
+  input.focus();
+});
 
 form.addEventListener("submit", event => {
   event.preventDefault();
